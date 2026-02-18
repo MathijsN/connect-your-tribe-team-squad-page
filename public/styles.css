@@ -147,3 +147,25 @@ ul {
     color: var(--color-text);
     padding: 2rem;
 }
+
+/* filter btn */
+
+.filter-bar {
+    display: flex;
+    padding: 1rem 0.5rem;
+}
+
+.sort-btn {
+    display: inline-flex;
+    align-items: center; 
+    background-color: var(--color-background-filter);
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    
+    &:hover {
+    opacity: 0.85;
+    }
+}

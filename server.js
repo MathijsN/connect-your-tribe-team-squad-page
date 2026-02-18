@@ -177,15 +177,15 @@ app.get('/studenten', async function (request, response) {
 
   const q = request.query.search || '' // kijken of er iets in de zoekbalk staat
   const isSearch = q.length > 0 //true als er iets gezocht is en false als de zoekbalk leeg id
+  const sort = request.query.sort || 'name' // 'name' = A-Z, '-name' = Z-A
 
 
   const params = {
-    'sort': 'name',
+    'sort': sort,
     'fields': '*,squads.*',
     'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
     'filter[squads][squad_id][cohort]': '2526',
     'limit': '100'
-
   }
 
   // Alleen zoekfilter toevoegen als er een zoekterm is
@@ -204,7 +204,8 @@ app.get('/studenten', async function (request, response) {
   response.render('artikelen.liquid', {
     query: q,
     persons: personResponseJSON.data,
-    isSearch: isSearch // true/false, voor de if in liquid
+    isSearch: isSearch, // true/false, voor de if in liquid
+    sort: sort // doorgeven aan de view
   })
 
 })
