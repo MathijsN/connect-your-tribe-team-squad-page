@@ -32,26 +32,46 @@
             {% for person in persons %}
              
             <li class="student-item">
-               
+
                 <img
                     class="student-avatar"
-                    src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}?width=80&height=80&fit=cover
-                    {% else %} /assets/no-pic.jpg {% endif %}"
+                    src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}?width=80&height=80&fit=cover{% else %}/assets/no-pic.jpg{% endif %}"
                     alt="Foto van {{ person.name }}">
- 
+               
                 <h2 class="student-name">{{ person.name }}</h2>
  
                 <button class="comment-button" aria-label="Opmerking toevoegen">✏️</button>
  
-                <p class="student-bio">{{ person.bio | truncate: 100 }}</p>
+                {% if person.bio %}
+                    <p class="student-bio">
+                        {{ person.bio | truncate: 120 }}
+                    </p>
+                {% endif %}
+
  
                 <p class="student-details">
-                    Favoriete dier: {{ person.fav_animal }},
-                    favoriete seizoen: {{ person.fav_season }},
-                    lengte: {{ person.length }},
-                    {{ person.residency }},
-                    Haarkleur: {{ person.hair_color }}.
+                    {% if person.fav_animal %}
+                        Favoriete dier: {{ person.fav_animal }},
+                    {% endif %}
+
+                    {% if person.fav_season %}
+                        favoriete seizoen: {{ person.fav_season }},
+                    {% endif %}
+
+                    {% if person.length %}
+                        lengte: {{ person.length }},
+                    {% endif %}
+
+                    {% if person.residency %}
+                        {{ person.residency }},
+                    {% endif %}
+
+                    {% if person.hair_color %}
+                        Haarkleur: {{ person.hair_color }}.
+                    {% endif %}
+                    
                 </p>
+
  
             </li>
  
