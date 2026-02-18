@@ -135,8 +135,9 @@ app.get('/random', async function (request, response) {
 
 
   console.log(personID)
+  console.log(randomPerson)
 
-  response.render('random.liquid', {
+  response.render('detailperson.liquid', {
     person: randomPerson,
     personID: personID,
     messages: messages
@@ -145,7 +146,7 @@ app.get('/random', async function (request, response) {
 
 app.post('/random', async function (request, response) {
 
-  // Stuur een POST request naar de messages tabel
+  // Stuur een POST request naar de messages tabel 
   // Een POST request bevat ook extra parameters, naast een URL
   await fetch('https://fdnd.directus.app/items/messages', {
 
