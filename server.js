@@ -60,6 +60,7 @@ app.get('/', async function (request, response) {
 app.get('/search', async function (request, response) {
   const q = request.query.q || "";
   const isSearch = !!request.query.q
+  const sort = request.query.sort || 'name' 
 
   console.log(q)
 
@@ -92,7 +93,7 @@ app.get('/search', async function (request, response) {
   const personResponse = await fetch(`https://fdnd.directus.app/items/person?` + new URLSearchParams(params))
   const personResponseJSON = await personResponse.json()
 
-  response.render('artikelen.liquid', { query: q, persons: personResponseJSON.data, isSearch: isSearch });
+  response.render('artikelen.liquid', { query: q, persons: personResponseJSON.data, isSearch: isSearch, sort: sort });
 })
 
 app.get('/random', async function (request, response) {
