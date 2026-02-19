@@ -3,24 +3,47 @@
 <main class="search-page">
 {% render 'partials/searchbar-while-searched.liquid' %}
 
+    <section class="detail-hero">
+        <img 
+            class="detail-avatar"
+            src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}?width=200&height=200&fit=cover{% else %}/assets/no-pic.jpg{% endif %}"
+            alt="Foto van {{ person.name }}">
 
-<h1>{{ person.name }}</h1>
+        <div class="detail-info">
+            <h1 class="detail-name">{{ person.name }}</h1>
+            {% if person.bio %}
+                <p class="detail-bio">{{ person.bio | escape }}</p>
+            {% endif %}
 
-{% for message in messages %}
-    <p>{{ message.from }}</p>
-    <p>{{ message.text }}</p>
-{% endfor %}
+            <ul class="detail-stats">
+                {% if person.residency %}<li>📍 {{ person.residency }}</li>{% endif %}
+                {% if person.fav_animal %}<li>🐾 {{ person.fav_animal }}</li>{% endif %}
+                {% if person.fav_season %}<li>🌤 {{ person.fav_season }}</li>{% endif %}
+                {% if person.hair_color %}<li>💇 {{ person.hair_color }}</li>{% endif %}
+                {% if person.length %}<li>📏 {{ person.length }}</li>{% endif %}
+            </ul>
+        </div>
+    </section>
 
-<form action="/random" method="post">
-    <label>
-        Naam:
-        <input type="text" name="from" required>
-    </label>
-    <label>
-        Bericht:
-        <textarea name="text" required></textarea>
-    </label>
-    <button type="submit">verstuur</button>
-</form>
+    <section class="detail-messages">
+        <h2>Berichten</h2>
+        {% for message in messages %}
+            <div class="message-item">
+                <p class="message-from">{{ message.from }}</p>
+                <p class="message-text">{{ message.text }}</p>
+            </div>
+        {% else %}
+            <p>Nog geen berichten voor {{ person.name }}.</p>
+        {% endfor %}
+    </section>
+
+    <section class="detail-form">
+        <h2>Laat een bericht achter</h2>
+        <form action="/student/{{ person.id }}" method="post">
+            <label>Naam: <input type="text" name="from" required></label>
+            <label>Bericht: <textarea name="text" required></textarea></label>
+            <button type="submit">Verstuur</button>
+        </form>
+    </section>
 
 </main>

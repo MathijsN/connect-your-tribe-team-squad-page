@@ -171,6 +171,13 @@ a {
     grid-row: 1;
     grid-column: 3;
     align-self: center;
+    position: relative;
+    z-index: 1;    /* zodat button boven de <a> zit */
+
+    img{
+        width: 18px;
+        height: 18px;
+    }
 
     &:hover {
         opacity: 0.7;
@@ -195,5 +202,4 @@ a {
     grid-column: 1 / -1;
     
 }
-
 

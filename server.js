@@ -234,8 +234,21 @@ app.get('/student/:id', async function (request, response) {
   })
 })
 
+app.post('/student/:id', async function (request, response) {
+    await fetch('https://fdnd.directus.app/items/messages', {
+        method: 'POST',
+        body: JSON.stringify({
+            for: `Person ${request.params.id}`,
+            from: request.body.from,
+            text: request.body.text
+        }),
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    });
 
-
+    response.redirect(303, `/studenten`)
+})
 
 app.set('port', process.env.PORT || 8000)
 
