@@ -203,3 +203,123 @@ a {
     
 }
 
+/*  detail page + POST*/
+.detail-page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+}
+
+.detail-hero {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 2rem 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.detail-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.detail-name {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.detail-bio {
+    color: var(--color-text-link);
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+}
+
+.detail-stats {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    li {
+        background-color: var(--color-background-secondary);
+        padding: 0.3rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+    }
+}
+
+.detail-messages {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #2a2a2a;
+
+    h2 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.message-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.message-from {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0 0 0.25rem 0;
+}
+
+.message-text {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.85;
+}
+
+.detail-form {
+    padding: 1.5rem 0;
+
+    h2 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column; /* label boven het input veld */
+        gap: 0.3rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    input, textarea {
+        background-color: var(--color-background-secondary);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        color: var(--color-text);
+        font-size: 0.9rem;
+    }
+
+    textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    button[type="submit"] {
+        background-color: var(--color-background-filter);
+        color: var(--color-text);
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+}
