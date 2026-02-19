@@ -52,3 +52,39 @@ body {
     }
 
 }
+
+section.searchbar-while-searched {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+
+
+    svg {
+        flex-shrink: 0;
+
+        transform: translateY(10px);
+    }
+    
+    form.searchbar {
+        margin: 0;
+
+        input {
+            width: 100%;
+        }
+    }
+
+    ul {
+        gap: 0.5rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        align-self: end;
+
+        a {
+            padding: 0;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+    }
+}
