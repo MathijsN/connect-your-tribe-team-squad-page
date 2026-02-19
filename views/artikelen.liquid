@@ -44,7 +44,7 @@
  
                 {% if person.bio %}
                     <p class="student-bio">
-                        {{ person.bio | truncate: 120 }}
+                        {{ person.bio | escape | truncate: 120 }}
                     </p>
                 {% endif %}
 
