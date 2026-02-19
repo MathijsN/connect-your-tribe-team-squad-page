@@ -16,3 +16,6 @@ We hebben gewerkt met verschillende routes om data op te halen uit de Directus A
 | `/search` | GET | Zoekresultaten op naam, favoriete dier, woonplaats, haarkleur |
 | `/random` | GET | Laat een willekeurige student zien |
 | `/random` | POST | Stuur een berichtje naar de random student |
+
+## Samenwerking
+We hebben voor het eerst gewerkt met Git branches. Ieder teamlid had zijn eigen branch en mergede naar main. Dit zorgde soms voor conflicten en veel uitzoekwerk, maar we leerden er veel van.
