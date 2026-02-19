@@ -60,7 +60,7 @@ app.get('/', async function (request, response) {
 app.get('/search', async function (request, response) {
   const q = request.query.q || "";
   const isSearch = !!request.query.q
-  const sort = request.query.sort || 'name' 
+  const sort = request.query.sort || 'name'
 
   console.log(q)
 
@@ -134,10 +134,6 @@ app.get('/random', async function (request, response) {
   const messagesResponseJSON = await messagesResponse.json()
   const messages = messagesResponseJSON.data
 
-
-  console.log(personID)
-  console.log(randomPerson)
-
   response.render('detailperson.liquid', {
     person: randomPerson,
     personID: personID,
@@ -210,6 +206,35 @@ app.get('/studenten', async function (request, response) {
   })
 
 })
+
+app.get('/student/:id', async function (request, response) {
+
+  const apiURL = 'https://fdnd.directus.app/items/person/' + request.params.id
+
+  const personResponse = await fetch(apiURL)
+  const personResponseJSON = await personResponse.json()
+
+
+  const paramsMessages = {
+    'filter[for]': `Person ${request.params.id}`,
+  }
+
+  const messagesApiURL =
+    'https://fdnd.directus.app/items/messages/?' +
+    new URLSearchParams(paramsMessages)
+
+  const messagesResponse = await fetch(messagesApiURL)
+  const messagesResponseJSON = await messagesResponse.json()
+  const messages = messagesResponseJSON.data
+
+  response.render('detailperson.liquid', {
+    person: personResponseJSON.data,
+    personID: personID,
+    messages: messages
+  })
+})
+
+
 
 
 app.set('port', process.env.PORT || 8000)
