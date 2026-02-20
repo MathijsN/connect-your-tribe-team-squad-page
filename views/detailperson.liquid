@@ -10,7 +10,7 @@
     <p>{{ message.text }}</p>
 {% endfor %}
 
-<form action="/random" method="post">
+{% comment %} <form action="/random" method="post">
     <label>
         Naam:
         <input type="text" name="from" required>
@@ -20,6 +20,6 @@
         <textarea name="text" required></textarea>
     </label>
     <button type="submit">verstuur</button>
-</form>
+</form> {% endcomment %}
 
 </main>
