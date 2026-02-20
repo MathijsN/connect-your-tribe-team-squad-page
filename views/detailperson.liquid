@@ -1,16 +1,96 @@
-{% render 'partials/head.liquid', title: 'Homepage' %}
+{% render 'partials/head.liquid', title: person.name %}
 
-<main class="search-page">
-{% render 'partials/searchbar-while-searched.liquid' %}
+<main class="detail-page">
+  {% render 'partials/searchbar-while-searched.liquid' %}
 
-<h1>{{ person.name }}</h1>
+  <article class="person-detail">
 
-{% for message in messages %}
-    <p>{{ message.from }}</p>
-    <p>{{ message.text }}</p>
-{% endfor %}
+    <header class="detail-header">
+      <h1 class="detail-title">
+        <span class="detail-emoji">{{ person.vibe_emoji }}</span>
+        {{ person.name }}
+        <span class="detail-emoji">{{ person.vibe_emoji }}</span>
+      </h1>
+    </header>
 
-{% comment %} <form action="/random" method="post">
+    <section class="detail-grid">
+      <figure class="detail-card detail-card--mugshot">
+        <img
+          class="detail-img"
+          src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}?width=600&height=400&fit=cover{% else %}/assets/no-pic.jpg{% endif %}"
+          alt="Mugshot van {{ person.name }}"
+        >
+      </figure>
+
+      <section class="detail-card detail-card--about">
+        <h2 class="detail-card-title">About</h2>
+        {% if person.bio %}
+          <p class="detail-text">{{ person.bio }}</p>
+        {% else %}
+          <p class="detail-text detail-text--muted">Geen bio ingevuld.</p>
+        {% endif %}
+      </section>
+
+      <div class="detail-pill detail-pill--residency">
+        {% if person.residency %}
+          {{ person.residency }}
+        {% else %}
+          Woonplaats onbekend
+        {% endif %}
+      </div>
+
+      <section class="detail-card detail-card--animal">
+        <p class="detail-card-label">Favoriete dier</p>
+        {% if person.fav_animal %}
+          <p class="detail-card-value">{{ person.fav_animal }}</p>
+        {% else %}
+          <p class="detail-card-value detail-text--muted">—</p>
+        {% endif %}
+      </section>
+
+      <figure class="detail-card detail-card--avatar">
+        <img
+          class="detail-img"
+          src="{% if person.avatar %}https://fdnd.directus.app/assets/{{ person.avatar }}?width=400&height=500&fit=cover{% else %}/assets/no-pic.jpg{% endif %}"
+          alt="Avatar van {{ person.name }}"
+        >
+      </figure>
+
+      <div class="detail-pill detail-pill--season">
+        {% if person.fav_season %}
+          {{ person.fav_season }}
+        {% else %}
+          Seizoen onbekend
+        {% endif %}
+      </div>
+
+      <section class="detail-card detail-card--metric">
+        {% if person.length %}
+          <p class="detail-card-value">{{ person.length }}</p>
+        {% else %}
+          <p class="detail-card-value detail-text--muted">—</p>
+        {% endif %}
+      </section>
+
+    </section>
+
+    <section class="detail-messages">
+      <h2 class="detail-section-title">Berichten</h2>
+
+      {% if messages and messages.size > 0 %}
+        <ul class="detail-message-list">
+          {% for message in messages %}
+            <li class="detail-message">
+              <p class="detail-message-from">{{ message.from }}</p>
+              <p class="detail-message-text">{{ message.text }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="detail-text detail-text--muted">Nog geen berichten.</p>
+      {% endif %}
+
+<form action="/random" method="post">
     <label>
         Naam:
         <input type="text" name="from" required>
@@ -20,6 +100,7 @@
         <textarea name="text" required></textarea>
     </label>
     <button type="submit">verstuur</button>
-</form> {% endcomment %}
+</form>
 
+  </article>
 </main>
