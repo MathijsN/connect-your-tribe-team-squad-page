@@ -207,6 +207,27 @@ app.get('/studenten', async function (request, response) {
 
 })
 
+
+app.get('/student/:id/bericht', async function (request, response) {
+    const apiURL = 'https://fdnd.directus.app/items/person/' + request.params.id
+    const personResponse = await fetch(apiURL)
+    const personResponseJSON = await personResponse.json()
+
+    const paramsMessages = {
+       'filter[for]': `Person ${request.params.id}`,
+    }
+
+    const messagesApiURL = 'https://fdnd.directus.app/items/messages/?' + new URLSearchParams(paramsMessages)
+    const messagesResponse = await fetch(messagesApiURL)
+    const messagesResponseJSON = await messagesResponse.json()
+
+    response.render('postpage.liquid', {
+        person: personResponseJSON.data,
+        messages: messagesResponseJSON.data 
+    })
+})
+
+
 app.get('/student/:id', async function (request, response) {
 
   const apiURL = 'https://fdnd.directus.app/items/person/' + request.params.id
@@ -234,6 +255,7 @@ app.get('/student/:id', async function (request, response) {
   })
 })
 
+
 app.post('/student/:id', async function (request, response) {
     await fetch('https://fdnd.directus.app/items/messages', {
         method: 'POST',
@@ -250,24 +272,6 @@ app.post('/student/:id', async function (request, response) {
     response.redirect(303, `/studenten`)
 })
 
-app.get('/student/:id/bericht', async function (request, response) {
-    const apiURL = 'https://fdnd.directus.app/items/person/' + request.params.id
-    const personResponse = await fetch(apiURL)
-    const personResponseJSON = await personResponse.json()
-
-    const paramsMessages = {
-       'filter[for]': `Person ${request.params.id}`,
-    }
-
-    const messagesApiURL = 'https://fdnd.directus.app/items/messages/?' + new URLSearchParams(paramsMessages)
-    const messagesResponse = await fetch(messagesApiURL)
-    const messagesResponseJSON = await messagesResponse.json()
-
-    response.render('postpage.liquid', {
-        person: personResponseJSON.data,
-        messages: messagesResponseJSON.data 
-    })
-})
 
 app.set('port', process.env.PORT || 8000)
 
