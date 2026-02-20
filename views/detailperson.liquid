@@ -74,10 +74,10 @@
 
     </section>
 
-    <section class="detail-messages">
-      <h2 class="detail-section-title">Berichten</h2>
+    {% comment %} <section class="detail-messages">
+      <h2 class="detail-section-title">Berichten</h2> {% endcomment %}
 
-      {% if messages and messages.size > 0 %}
+      {% comment %} {% if messages and messages.size > 0 %}
         <ul class="detail-message-list">
           {% for message in messages %}
             <li class="detail-message">
@@ -88,19 +88,29 @@
         </ul>
       {% else %}
         <p class="detail-text detail-text--muted">Nog geen berichten.</p>
-      {% endif %}
+      {% endif %} {% endcomment %}
 
-<form action="/random" method="post">
-    <label>
-        Naam:
-        <input type="text" name="from" required>
-    </label>
-    <label>
-        Bericht:
-        <textarea name="text" required></textarea>
-    </label>
-    <button type="submit">verstuur</button>
-</form>
+         <section class="detail-messages">
+        <h2>Berichten</h2>
+        {% for message in messages %}
+            <div class="message-item">
+                <p class="message-from">{{ message.from }}</p>
+                <p class="message-text">{{ message.text }}</p>
+            </div>
+        {% else %}
+            <p>Nog geen berichten voor {{ person.name }}.</p>
+        {% endfor %}
+    </section>
+
+
+    <section class="detail-form">
+        <h2>Laat een bericht achter</h2>
+        <form action="/student/{{ person.id }}" method="post">
+            <label>Naam: <input type="text" name="from" required></label>
+            <label>Bericht: <textarea name="text" required></textarea></label>
+            <button type="submit">Verstuur</button>
+        </form>
+    </section>
 
   </article>
 </main>
