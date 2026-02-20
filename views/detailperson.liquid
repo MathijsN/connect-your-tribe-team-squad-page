@@ -90,20 +90,17 @@
         <p class="detail-text detail-text--muted">Nog geen berichten.</p>
       {% endif %}
 
-      <form class="detail-form" action="/random" method="post">
-        <label class="detail-label">
-          Naam:
-          <input class="detail-input" type="text" name="from" required>
-        </label>
-
-        <label class="detail-label">
-          Bericht:
-          <textarea class="detail-textarea" name="text" required></textarea>
-        </label>
-
-        <button class="detail-button" type="submit">verstuur</button>
-      </form>
-    </section>
+<form action="/random" method="post">
+    <label>
+        Naam:
+        <input type="text" name="from" required>
+    </label>
+    <label>
+        Bericht:
+        <textarea name="text" required></textarea>
+    </label>
+    <button type="submit">verstuur</button>
+</form>
 
   </article>
 </main>
