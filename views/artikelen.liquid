@@ -31,16 +31,20 @@
         <ul class="student-list">
             {% for person in persons %}
             <a href="/student/{{ person.id }}">
-            <li class="student-item">
 
+             <li class="student-item">
+                
                 <img
                     class="student-avatar"
                     src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}?width=80&height=80&fit=cover{% else %}/assets/no-pic.jpg{% endif %}"
                     alt="Foto van {{ person.name }}">
                
                 <h2 class="student-name">{{ person.name }}</h2>
- 
-                <button class="comment-button" aria-label="Opmerking toevoegen">✏️</button>
+
+               <button class="comment-button" data-href="/student/{{ person.id }}/bericht">
+                     <img src="/assets/edit.svg" alt="bewerk">
+                </button>
+
  
                 {% if person.bio %}
                     <p class="student-bio">
@@ -72,8 +76,10 @@
                     
                 </p>
 
- 
-            </li>
+                
+
+
+             </li>
             </a>
             {% endfor %}
         </ul>
