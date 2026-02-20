@@ -170,6 +170,35 @@ app.post('/random', async function (request, response) {
   response.redirect(303, '/random')
 })
 
+app.post('/student/:id', async function (request, response) {
+
+    await fetch('https://fdnd.directus.app/items/messages', {
+
+        method: 'POST',
+
+        body: JSON.stringify({
+
+            for: `Person ${request.params.id}`,
+
+            from: request.body.from,
+
+            text: request.body.text
+
+        }),
+
+        headers: {
+
+            'Content-Type': 'application/json;charset=UTF-8'
+
+        }
+
+    });
+ 
+    response.redirect(303, `/studenten`)
+
+})
+ 
+
 app.get('/studenten', async function (request, response) {
 
   const q = request.query.search || '' // kijken of er iets in de zoekbalk staat
